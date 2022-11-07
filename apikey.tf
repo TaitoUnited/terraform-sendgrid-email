@@ -15,7 +15,7 @@
  */
 
 resource "sendgrid_api_key" "api_key" {
-  for_each  = {for item in local.apiKeysById: item.id => item}
+  for_each  = local.apiKeysById
 
   name      = each.value.name
   scopes    = [for service in each.value.services: service.name]

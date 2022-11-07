@@ -15,7 +15,7 @@
  */
 
 resource "sendgrid_parse_webhook" "default" {
-  for_each  = {for item in local.webhooksById: item.id => item}
+  for_each  = local.webhooksById
 
   hostname = each.value.options.hostname  
   url = each.value.url
