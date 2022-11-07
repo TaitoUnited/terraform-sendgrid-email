@@ -17,13 +17,13 @@
 locals {
 
   apiKeysById = {
-    for apiKey in coalesce(var.resources.apiKeys, []):
+    for apiKey in coalesce(try(var.resources.auth.apiKeys, []), []):
     "${apiKey.name}-${apiKey.provider}" => apiKey
     if var.create_api_keys && apiKey.provider == "sendgrid"
   }
 
   webhooksById = {
-    for webhook in coalesce(var.resources.webhooks, []):
+    for webhook in coalesce(try(var.resources.integration.webhooks, [])):
     "${webhook.name}-${webhook.provider}" => webhook
     if var.create_webhooks && webhook.provider == "sendgrid"
   }

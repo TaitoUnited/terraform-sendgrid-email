@@ -24,21 +24,23 @@ Example YAML:
 
 ```
 # See variables.tf for more options
-apiKeys:
-  - provider: sendgrid
-    name: my-project-prod-server
-    services:
-      - name: mail.send
-      - name: sender_verification_eligible
+auth:
+  apiKeys:
+    - provider: sendgrid
+      name: my-project-prod-server
+      services:
+        - name: mail.send
+        - name: sender_verification_eligible
 
-webhooks:
-  - provider: sendgrid
-    name: my-project-prod-server-email
-    url: https://my-project-prod/api/email
-    options:
-      hostname: my-project-prod.mydomain.com
-      spamCheck: false
-      sendRaw: false
+integration:
+  webhooks:
+    - provider: sendgrid
+      name: my-project-prod-server-email
+      url: https://my-project-prod/api/email
+      options:
+        hostname: my-project-prod.mydomain.com
+        spamCheck: false
+        sendRaw: false
 ```
 
 Similar provider agnostic YAML format is used also by the following modules:

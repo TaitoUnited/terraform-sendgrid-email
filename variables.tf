@@ -33,24 +33,28 @@ variable "create_webhooks" {
 variable "resources" {
   type = object({
 
-    apiKeys = optional(list(object({
-      provider = optional(string)
-      name = string
-      services = list(object({
+    auth = optional(object({
+      apiKeys = optional(list(object({
+        provider = optional(string)
         name = string
-      }))
-    })))
+        services = list(object({
+          name = string
+        }))
+      })))
+    }))
 
-    webhooks = optional(list(object({
-      name = string
-      provider = optional(string)
-      url = string
-      options = optional(object({
-        hostname: optional(string)
-        spamCheck: optional(bool)
-        sendRaw: optional(bool)
-      }))
-    })))
+    integration = optional(object({
+      webhooks = optional(list(object({
+        name = string
+        provider = optional(string)
+        url = string
+        options = optional(object({
+          hostname: optional(string)
+          spamCheck: optional(bool)
+          sendRaw: optional(bool)
+        }))
+      })))
+    }))
 
   })
   description = "Resources as JSON (see README.md). You can read values from a YAML file with yamldecode()."
